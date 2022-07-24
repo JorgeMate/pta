@@ -1,3 +1,33 @@
 {# templates/admin/index.html.twig #}
 
 {% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}Algunos Datos básicos de todos los paises del mundo{% endblock %}
+
+{% block main %}
+    <table class="datagrid">
+        <thead>
+            <tr>
+                <td>Símbolo</td>
+                <td>Acción correspondiente</td>
+            </tr>
+        </thead>
+        <tbody>
+            {# for data in my_own_data #}
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                  <tr>
+                    <td><i class="fa-regular fa-flag"></i> Paises: </td>
+                    <td></td>
+                </tr>
+
+
+
+                
+            {# endfor #}
+        </tbody>
+    </table>
+{% endblock %}
+
