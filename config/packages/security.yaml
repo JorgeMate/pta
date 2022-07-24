@@ -21,6 +21,8 @@ security:
                 login_path: app_login
                 check_path: app_login
 
+                enable_csrf: false
+
             logout:
                 # The route name the user can go to in order to logout
                 path: app_logout
