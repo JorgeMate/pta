@@ -52,7 +52,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Panel de Control', 'fa fa-home');
         yield MenuItem::linkToCrud('Paises', 'fa-regular fa-flag', Pais::class);
         yield MenuItem::section('Importar');
-        yield MenuItem::linkToRoute('Importar paises faltantes', 'fa-solid fa-angles-down', 'app_login');
+        yield MenuItem::linkToRoute('Importar paises faltantes', 'fa-solid fa-angles-down', 'allCountries');
         yield MenuItem::section();
         yield MenuItem::linkToLogout('Logout', 'fa-solid fa-person-through-window');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
