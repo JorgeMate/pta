@@ -37,6 +37,9 @@ class Pais
     #[ORM\Column(nullable: true)]
     private ?int $population = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $flag = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +137,18 @@ class Pais
     public function setPopulation(?int $population): self
     {
         $this->population = $population;
+
+        return $this;
+    }
+
+    public function getFlag(): ?string
+    {
+        return $this->flag;
+    }
+
+    public function setFlag(?string $flag): self
+    {
+        $this->flag = $flag;
 
         return $this;
     }

@@ -11,6 +11,14 @@ use App\Entity\Pais;
 
 class PaisController extends AbstractController
 {
+
+    #[Route('/api/country/{common}', name: 'oneCountry')]
+    public function getOneCountry(ManagerRegistry $doctrine)
+    {    
+
+
+    }
+
     #[Route('/api/countries', name: 'allCountries')]
     public function getAllCountries(ManagerRegistry $doctrine)
     {
@@ -38,6 +46,7 @@ class PaisController extends AbstractController
             $capital = null;
             $tld = null;
             $subregion = null;
+            $flag = null;
 
             $common = $data["name"]["common"];
             $official = $data["name"]["official"];
@@ -53,6 +62,11 @@ class PaisController extends AbstractController
             }
             $area = $data["area"];
             $population = $data["population"];
+
+            if(isset($data["flag"])){
+                 $flag = $data["flag"];
+            }
+
 
             # Existe ya un pais con ese nombre en nuestra BBDD ? (Por convenio, Solo importamos los que no existen)
             $pais = $repository->findOneBy(['name_common' => $common]);
@@ -70,6 +84,7 @@ class PaisController extends AbstractController
                 $pais->setSubregion($subregion);
                 $pais->setArea($area);
                 $pais->setPopulation($population);
+                $pais->setFlag($flag);
                 $em->persist($pais);
                 $em->flush();
 

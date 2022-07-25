@@ -44,15 +44,20 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('PAISES');
+            ->setTitle('PAISES del mundo');
     }
 
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Panel de Control', 'fa fa-home');
+        yield MenuItem::section();
         yield MenuItem::linkToCrud('Paises', 'fa-regular fa-flag', Pais::class);
+        yield MenuItem::section();
         yield MenuItem::section('Importar');
         yield MenuItem::linkToRoute('Importar paises faltantes', 'fa-solid fa-angles-down', 'allCountries');
+        yield MenuItem::section('Actualizar');
+        yield MenuItem::linkToRoute('Solo datos de un país', 'fa-solid fa-file-import', 'oneCountry', ['$common' => '']);
+        yield MenuItem::section();
         yield MenuItem::section();
         yield MenuItem::linkToLogout('Logout', 'fa-solid fa-person-through-window');
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);

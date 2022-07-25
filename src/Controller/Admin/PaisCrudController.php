@@ -5,9 +5,11 @@ namespace App\Controller\Admin;
 use App\Entity\Pais;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
+
+
 
 
 class PaisCrudController extends AbstractCrudController
@@ -17,32 +19,25 @@ class PaisCrudController extends AbstractCrudController
         return Pais::class;
     }
 
-    /*
+    
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+           
+            IdField::new('id')->hideOnForm(),
+           
+            Field::new('name_common'),
+            Field::new('name_official')->hideOnIndex(),
+            Field::new('capital'),
+            Field::new('region')->hideOnIndex(),
+            Field::new('subregion'),
+            Field::new('flag'),
+            Field::new('tld'),
+            NumberField::new('area')->setNumDecimals(0),
+            NumberField::new('population')->setNumDecimals(0),
+            
         ];
     }
-    */
+    
 
-
-
-    public function configureActions(Actions $actions): Actions
-    {
-        $importPais = Action::new('importPais', 'Importar datos del país', 'fa-solid fa-file-arrow-down')
-            ->displayAsLink()
-            ->setHtmlAttributes(['data-foo' => 'bar', 'target' => '_blank'])
-
-        // if the route needs parameters, you can define them:
-        // 1) using an array
-        ->linkToRoute('app_login', []);
-
-
-
-        return $actions->add(Crud::PAGE_DETAIL, $importPais);
-
-    }
 }
