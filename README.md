@@ -14,7 +14,7 @@
 
 ### Instrucciones generales
 
-+ > git clone pta "https://github.com/JorgeMate/pta.git"
++ > git clone https://github.com/JorgeMate/pta.git
 + > cd pta
 + > composer update
 + > docker-compose up -d

@@ -59,7 +59,7 @@ class PaisController extends AbstractController
         $area = $object->area;
         $population = $object->population;
         $flag = null;
-        if(isset($data["flag"])){
+        if(isset($object->flag)){
             $flag = $object->flag;
         }
 
