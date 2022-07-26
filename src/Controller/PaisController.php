@@ -20,8 +20,6 @@ class PaisController extends AbstractController
     private $em;
     private $repository;
 
-
-
     public function __construct(AdminUrlGenerator $adminUrlGenerator, ManagerRegistry $doctrine)
     {
         $this->adminUrlGenerator = $adminUrlGenerator;
@@ -29,9 +27,9 @@ class PaisController extends AbstractController
         $this->repository = $doctrine->getRepository(Pais::class);
     }
 
-
-
+    
     #[Route('/api/country/{id}/{common}', name: 'oneCountry')]
+    #-----------------------------------------------------------
     public function getOneCountry(Pais $pais, $common): Response
 
     {    
@@ -41,7 +39,7 @@ class PaisController extends AbstractController
         $arrayObject = json_decode($contents);
         $object = $arrayObject[0];
 
-        #dd($object->capital);
+        #dd($object);
 
         $common = $object->name->common;
         $official = $object->name->official;
@@ -90,7 +88,8 @@ class PaisController extends AbstractController
 
 
     #[Route('/api/countries', name: 'allCountries')]
-    public function getAllCountries(ManagerRegistry $doctrine): Response
+    #-----------------------------------------------
+    public function getAllCountries(): Response
     {
 
         $countries = new \GuzzleHttp\Client(['base_uri' => 'https://restcountries.com']);
@@ -106,10 +105,15 @@ class PaisController extends AbstractController
             #---------------------------
         }
 
-        return $this->redirectToRoute('admin_dashboard');
-
+        $backUrl = $this->adminUrlGenerator
+            ->setController(PaisCrudController::class)
+            ->setAction(Action::INDEX)
+            ->generateUrl();
+            
+        return $this->redirect($backUrl);
     }
 
+    #-------------------------------------
     private function getSetResults($data){       
         
         $common = $data["name"]["common"];
@@ -159,8 +163,5 @@ class PaisController extends AbstractController
             $this->em->persist($pais);
             $this->em->flush();
         }
-
-        
-        
     }
 }

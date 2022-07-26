@@ -45,7 +45,7 @@ class PaisCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $getOneCountry = Action::new('getOneCountry', 'Actualizar info del Pais', 'fa-solid fa-file-import')
+        $getOneCountry = Action::new('getOneCountry', 'Descargar y Actualizar info del Pais', 'fa-solid fa-file-import')
             ->displayAsLink()
             ->addCssClass('btn btn-danger')
             ->linkToRoute('oneCountry', function (Pais $pais): array {
