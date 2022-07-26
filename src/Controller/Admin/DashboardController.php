@@ -11,6 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 use App\Entity\Pais;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -50,17 +53,27 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Panel de Control', 'fa fa-home');
+
         yield MenuItem::section();
         yield MenuItem::linkToCrud('Paises', 'fa-regular fa-flag', Pais::class);
+
         yield MenuItem::section();
         yield MenuItem::section('Importar');
         yield MenuItem::linkToRoute('Importar paises faltantes', 'fa-solid fa-angles-down', 'allCountries');
-        yield MenuItem::section('Actualizar');
-        yield MenuItem::linkToRoute('Solo datos de un país', 'fa-solid fa-file-import', 'oneCountry', ['$common' => '']);
+       
         yield MenuItem::section();
         yield MenuItem::section();
-        yield MenuItem::linkToLogout('Logout', 'fa-solid fa-person-through-window');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToLogout('Salir', 'fa-solid fa-person-through-window');
+
+        #yield MenuItem::linktoRoute('Actualizar info del Pais', 'fa-solid fa-file-import', 'oneCountry');
+        
+    }
+
+    public function configureActions(): Actions
+    {
+        return parent::configureActions()
+            ->add(Crud::PAGE_INDEX, Action::DETAIL);
+
     }
 
 
